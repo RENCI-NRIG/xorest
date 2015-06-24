@@ -1,0 +1,32 @@
+# xorest example configuration (DO NOT USE TABS)
+# These properties get translated into e.g. na2.config=/some/path
+
+# point to log4j configuration
+logging:
+  config: /some/path/log4j-xorest.properties
+
+# set the database 
+spring:
+  datasource:
+    url: jdbc:mysql://hostname/database
+    username: username
+    password: password
+
+server:
+  port: 8080
+  address:     # bind to specific address
+  ssl:
+    enabled: false
+    key-alias: selfsigned
+    key-password: keypass
+    key-store: /some/path/keystore.jks
+    key-store-password: keystorepass
+    trust-store: /some/path/keystore.jks
+    trust-store-password: truststorepass
+
+xorest:
+  cache:
+    timeout: 120000
+  queries:
+    - { name: "slice", query: "select count(*) from xoslices" }
+    - { name: "user", query: " select count(distinct(slice_owner)) from xoslices" }
